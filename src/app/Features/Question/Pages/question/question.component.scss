@@ -1,0 +1,14 @@
+.dis{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 65vh;
+}
+
+@media (max-width:500px) {
+    .dis{
+    width: 95vw;
+    height: 30vh;
+}
+}

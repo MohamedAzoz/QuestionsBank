@@ -1,0 +1,37 @@
+<div class="container-fluid dis text-bg-light rounded-5 p-2">
+  <div
+    [hidden]="!result"
+    class="row w-100 mx-auto gap-1 gap-lg-2"
+  >
+    @if(result>=80 &&result<=100) {
+    <p class="w-75 mx-auto alert alert-success text-center">Excellent!</p>
+    <p class="w-75 mx-auto alert alert-success text-center">congratulant!</p>
+    } @else if (result>=60&&result<=80) {
+    <p class="w-75 mx-auto alert alert-warning text-center">Very good!</p>
+    } @else if(result>=0&&result<=60) {
+    <p class="w-75 mx-auto alert alert-danger text-center">Good luck next time</p>
+    }
+  </div>
+  <div class="container cont">
+    <div
+      class="rounded-5 show"
+      [ngClass]="{
+        'text-bg-success': result >= 80 && result <= 100,
+        'text-bg-warning': result >= 60 && result <= 80,
+        'text-bg-danger': result >= 0 && result <= 60
+      }"
+    >
+      <p class="pg">{{ degree }} / {{ numberOfQuestions }}</p>
+    </div>
+    <div
+      class="rounded-5 show"
+      [ngClass]="{
+        'text-bg-success': result >= 80 && result <= 100,
+        'text-bg-warning': result >= 60 && result <= 80,
+        'text-bg-danger': result >= 0 && result <= 60
+      }"
+    >
+      <p class="pg">{{ result }}% / 100%</p>
+    </div>
+  </div>
+</div>

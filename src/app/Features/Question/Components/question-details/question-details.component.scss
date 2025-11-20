@@ -1,0 +1,29 @@
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.view{
+    display: grid;
+    align-content: center;
+    grid-template-rows: auto-fill;
+    grid-template-columns: auto-fill;
+    padding: 2.5vh 1vw;
+    row-gap: 1vh;
+    font-size: 2vw;
+    font-weight: 500;
+}
+.Text-font{
+    font-size: 1.5vw;
+    font-weight: 500;
+}
+
+@media (max-width:500px) {
+    .view{
+        font-size: 2.2vw;
+    }
+    .Text-font{
+        font-size: 2.1vw;
+    }
+}

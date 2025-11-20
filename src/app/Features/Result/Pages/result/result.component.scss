@@ -1,0 +1,47 @@
+
+
+
+.dis{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 65vw;
+    height: 65vb;
+}
+.cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+
+ & .show{
+    width: 15vw;
+    height: 15vb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border-radius: 35%;
+    & .pg{
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
+}
+
+@media (max-width:500px) {
+   .cont{
+    gap: 1rem;
+
+ & .show{
+    width: 28vw;
+    height: 8vb;
+    & .pg{
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+}
+}
+}

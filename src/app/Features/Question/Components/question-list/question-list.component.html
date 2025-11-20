@@ -1,0 +1,13 @@
+<div class="container">
+  @for (question of questions; track $index;let c=$count) {
+  <div class="row d-flex flex-column align-items-center justify-content-center">
+    
+    <button (click)="go(question.questionId)"
+      class="col-4 p-2 rounded-circle bg-light my-1 d-flex justify-content-center"
+    >
+    {{questions.indexOf(question)+1}}
+    </button>
+    
+  </div>
+  }
+</div>

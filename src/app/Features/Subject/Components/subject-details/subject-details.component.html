@@ -1,0 +1,14 @@
+<div
+  class="container dis d-flex flex-column flex-md-row flex-wrap justify-content-evenly"
+>
+  @for (subject of subjects; track $index) {
+  <div class="col-4">
+    <a
+      class="btn click"
+      [routerLink]="['/subject', subject.subjectId]"
+      routerLinkActive="active"
+      >{{ subject.subjectName }}</a
+    >
+  </div>
+  }
+</div>

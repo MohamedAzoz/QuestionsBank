@@ -1,0 +1,24 @@
+.dis{
+    
+    width: 95%;
+    // height: 80vb;
+}
+.click{
+    background-color: gainsboro;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
+    font-size: 2.2vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;   
+    animation: shadow 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    // smooth hover effect
+&:hover{
+    background-color: gold;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 40px 0 rgba(0, 0, 0, 0.19);
+     
+}
+}

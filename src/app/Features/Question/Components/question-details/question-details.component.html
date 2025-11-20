@@ -1,0 +1,56 @@
+<div class="container-fluid view">
+  <div class="row d-md-block d-flex justify-content-center">
+    <p
+      class="col-6 col-md-3 d-flex justify-content-center align-items-center p-1 rounded-2 text-bg-light"
+    >
+      {{ questions.length }}/{{ questions.indexOf(question) + 1 }}
+    </p>
+  </div>
+  <div class="row d-md-block d-flex justify-content-center">
+    <p class="text-center text-md-start w-auto">
+      {{ question.content }}
+    </p>
+  </div>
+  <div
+    class="row gap-1 gap-md-2 gap-lg-3 m-auto m-md-0 d-flex justify-content-evenly flex-wrap"
+  >
+    @for (option of question.options; track $index) {
+    <button
+      style="background-color: white"
+      [ngClass]="{
+        'text-bg-success':
+          option.optionId == question.optionAswerId &&
+          (IsTrue || IsNotCorrectOption),
+        'text-bg-danger':
+          SelectOptionId != question.optionAswerId &&
+          option.optionId == SelectOptionId &&
+          IsFalse
+      }"
+      [disabled]="IsSelected"
+      class="col-9 col-md-5 p-1 p-lg-2 d-flex justify-content-center align-items-center rounded-2 Text-font"
+      [id]="option.optionId"
+      (click)="select(option)"
+    >
+      {{ option.text }}
+    </button>
+    }
+  </div>
+  <div class="row">
+    @defer (when IsSelected) {
+    <button
+      (click)="next()"
+      [hidden]="IsEndQuestion"
+      class="col-4 col-md-3 py-0 py-lg-2 m-auto m-md-0 btn btn-primary rounded-3 Text-font"
+    >
+      next
+    </button>
+    } @defer (when IsSelected && IsEndQuestion) {
+    <button
+      (click)="endTest()"
+      class="col-4 col-md-3 py-1 py-lg-2 btn btn-danger m-auto rounded-3 Text-font"
+    >
+      End Test
+    </button>
+    }
+  </div>
+</div>
