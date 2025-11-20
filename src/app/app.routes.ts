@@ -24,4 +24,12 @@ export const routes: Routes = [
         (C) => C.ResultComponent
       ),
   },
+  {
+    path:"**",
+    loadComponent: () =>
+      import('./Shared/Components/not-found/not-found.component').then(
+        (C) => C.NotFoundComponent
+      ),
+      title:"Not Found"
+  }
 ];
