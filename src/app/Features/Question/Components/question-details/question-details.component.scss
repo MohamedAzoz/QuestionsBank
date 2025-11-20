@@ -1,29 +1,79 @@
-*{
-    border: 0;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+ .view {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
 }
-.view{
-    display: grid;
-    align-content: center;
-    grid-template-rows: auto-fill;
-    grid-template-columns: auto-fill;
-    padding: 2.5vh 1vw;
-    row-gap: 1vh;
-    font-size: 2vw;
-    font-weight: 500;
-}
-.Text-font{
-    font-size: 1.5vw;
-    font-weight: 500;
+.Text-font {
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.end-test {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;  
+    width: 100%;
+    padding: 10px 20px; 
+}
+.next-test {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 1vh 2vw;
+    
+}
+.next-test:hover {
+    background-color: #0b5ed7;
+}
+.next-test:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.option-test {
+    background-color: #f8f9fa;
+    border: 2px solid #ced4da;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+}
+ .question-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 2vh 2vw;
+    height: 100%;
+    width: 100%;
+    background-color: gainsboro;
+}
 @media (max-width:500px) {
-    .view{
-        font-size: 2.2vw;
+    .question-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        padding: 1vh 1vw;
     }
-    .Text-font{
-        font-size: 2.1vw;
+    .Text-font {
+        font-size: 1rem;
+    }
+    .end-test, .next-test, .option-test {
+        padding: 8px 16px;
+    }
+    .view {
+        width: 95%;
+        padding: 10px;
+        margin-top: 10px;
     }
 }
