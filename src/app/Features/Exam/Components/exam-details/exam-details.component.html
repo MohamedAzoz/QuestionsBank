@@ -10,6 +10,14 @@
       >{{ exam.name }}</a
     >
   </div>
+  <div class="col-11 col-md-9 m-2 p-3 text-center exam-box">
+   <a
+     class="btn click"
+     routerLinkActive="active"
+     [routerLink]="['/subject', subjectId, 'test', exam.id, questionId]"
+     >Test</a
+     >
+ </div>
   } @empty {
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="spinner-border text-primary" role="status">

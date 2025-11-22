@@ -1,0 +1,21 @@
+.question-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 2vw;
+    height: 100vh;
+    width: 100%;
+    background-color: gainsboro;
+}
+@media (max-width:500px) {
+    .question-container {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // flex-direction: column;
+        // height: 100vh;
+        padding: 1vw;
+    }
+}

@@ -11,6 +11,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'subject/:subjectId/test/:examId/:questionId',
+    loadComponent: () =>
+      import('./Features/Test/Pages/test/test.component').then(
+        (C) => C.TestComponent
+      ),
+  },
+  {
     path: 'subject/:subjectId/exam/:examId/:questionId',
     loadComponent: () =>
       import('./Features/Question/Pages/question/question.component').then(
@@ -25,11 +32,11 @@ export const routes: Routes = [
       ),
   },
   {
-    path:"**",
+    path: '**',
     loadComponent: () =>
       import('./Shared/Components/not-found/not-found.component').then(
         (C) => C.NotFoundComponent
       ),
-      title:"Not Found"
-  }
+    title: 'Not Found',
+  },
 ];
