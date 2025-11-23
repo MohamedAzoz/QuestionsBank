@@ -42,20 +42,18 @@
     </div>
     }
   </div>
-  <div class="row d-flex justify-content-center">
-    @defer (when IsSelected) {
+  <div class="row w-25">
     <button
       (click)="next()"
-      [hidden]="IsEndQuestion"
-      [ngClass]="{ disabled: !IsSelected }"
-      class="col-6 col-md-5 py-1 py-lg-2 btn next-test m-auto rounded-3 Text-font"
+      [hidden]="IsEndQuestion || !IsSelected"
+      class="col-5 col-md-4 py-1 py-lg-2 btn next-test m-auto rounded-3 Text-font"
     >
       next
     </button>
-    } @defer (when IsSelected && IsEndQuestion) {
+    @defer (when IsSelected && IsEndQuestion) {
     <button
       (click)="endTest()"
-      class="col-6 col-md-5 py-1 py-lg-2 btn end-test m-auto rounded-3 Text-font"
+      class="col-5 col-md-4 py-1 py-lg-2 btn end-test m-auto rounded-3 Text-font"
     >
       End Test
     </button>

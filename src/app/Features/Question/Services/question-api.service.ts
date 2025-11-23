@@ -4,6 +4,7 @@ import { IResult } from '../../../Core/Models/iresult';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { IQuestion } from '../Models/iquestion';
+import { IQuestionData } from '../../Test/Models/iquestion-data';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,11 @@ import { IQuestion } from '../Models/iquestion';
 export class QuestionAPIService {
   public question: BehaviorSubject<IQuestion | null> =
     new BehaviorSubject<IQuestion | null>(null);
+
+  // public questionsOptions: BehaviorSubject<IQuestionData[]> = new BehaviorSubject<
+  //   IQuestionData[]
+  // >([]);
+
   constructor(private _http: HttpClient) {}
 
   getAll(examId: number): Observable<IResult<IQuestion[]>> {

@@ -19,17 +19,11 @@
     <button
       style="background-color: white"
       [ngClass]="{
-        'text-bg-success':
-          option.optionId == question.optionAswerId &&
-          (IsTrue || IsNotCorrectOption),
-        'text-bg-danger':
-          SelectOptionId != question.optionAswerId &&
-          option.optionId == SelectOptionId &&
-          IsFalse
+        'text-bg-primary':
+          (IsSelected && option.optionId === SelectedID) ||
+          (option.optionId === SelectedID && QuestionIsFound)
       }"
-      [disabled]="IsSelected"
       class="col-11 col-md-5 btn option-test Text-font rounded-3"
-      [id]="option.optionId"
       (click)="select(option)"
     >
       {{ option.text }}
@@ -42,20 +36,27 @@
     </div>
     }
   </div>
-  <div class="row d-flex justify-content-center">
-    @defer (when IsSelected) {
+  <div class="w-25 row">
     <button
+      (click)="back()"
+      [hidden]="QuestionIndex == 0"
+      class="col-4 col-md-3 py-1 py-lg-2 bg-danger btn next-test m-auto rounded-3 Text-font"
+    >
+      back
+    </button>
+  </div>
+  <div class="row w-25">
+    <button
+    class="col-4 col-md-3 py-1 py-lg-2 bg-primary btn next-test m-auto rounded-3 Text-font"
       (click)="next()"
-      [hidden]="IsEndQuestion"
-      [ngClass]="{ disabled: !IsSelected }"
-      class="col-6 col-md-5 py-1 py-lg-2 btn next-test m-auto rounded-3 Text-font"
+      [hidden]="QuestionIndex == questions.length - 1"
     >
       next
     </button>
-    } @defer (when IsSelected && IsEndQuestion) {
+ @defer (when IsSelected && IsEndQuestion) {
     <button
       (click)="endTest()"
-      class="col-6 col-md-5 py-1 py-lg-2 btn end-test m-auto rounded-3 Text-font"
+      class="col-4 col-md-3 py-1 py-lg-2 btn end-test m-auto rounded-3 Text-font"
     >
       End Test
     </button>

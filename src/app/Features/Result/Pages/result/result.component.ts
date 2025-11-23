@@ -23,7 +23,8 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     let mark: number = 0;
     this._shared.degree.subscribe((x) => (mark = x));
-    this.degree = mark;
+    let mark2 = parseInt(localStorage.getItem('degree')!);
+    this.degree = mark > mark2 ? mark : mark2;
 
     let Length: number = 0;
     this._shared.numberOfQuestions.subscribe((x) => (Length = x));
@@ -35,6 +36,7 @@ export class ResultComponent implements OnInit {
     this.result = parseInt(`${value}`);
     if (!value && !Length && !mark) {
       this._router.navigate(['']);
+      localStorage.clear();
     }
   }
 }

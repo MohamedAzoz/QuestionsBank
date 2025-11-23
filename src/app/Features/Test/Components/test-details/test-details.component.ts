@@ -11,21 +11,20 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [NgClass],
   templateUrl: './test-details.component.html',
-  styleUrl: './test-details.component.scss'
+  styleUrl: './test-details.component.scss',
 })
 export class TestDetailsComponent implements OnInit {
   @Input({ required: true }) questions!: IQuestion[];
   question!: IQuestion;
 
-  IsTrue: boolean = false;
-  IsFalse: boolean = false;
   IsSelected: boolean = false;
-  IsNotCorrectOption: boolean = false;
 
-  
-  SelectOptionId!: number;
+  SelectedID: number = 0;
+  QuestionIndex: number = 0;
 
   IsEndQuestion: boolean = false;
+  IsStartQuestion: boolean = false;
+  QuestionIsFound: boolean = false;
   constructor(
     private _questApi: QuestionAPIService,
     private _shared: SharedDataService,
@@ -36,27 +35,26 @@ export class TestDetailsComponent implements OnInit {
     this._questApi.question.subscribe((x) => {
       if (x) {
         this.question = x;
-        this.IsTrue = false;
-        this.IsNotCorrectOption = false;
         this.IsSelected = false;
-        this.IsFalse = false;
-         // قم بفحص ما إذا كان السؤال الحالي هو الأخير عند التحديث
+        // قم بفحص ما إذا كان السؤال الحالي هو الأخير عند التحديث
+        this.QuestionIndex = this.questions.indexOf(this.question);
         this.IsEndQuestion =
           this.questions.indexOf(this.question) === this.questions.length - 1;
+        this.IsStartQuestion =
+          this.questions.indexOf(this.question) <= this.questions.length - 1;
+
+        const optionValue = localStorage.getItem(`${this.question.questionId}`);
+        this.SelectedID = optionValue ? parseInt(optionValue) : 0;
+        this.QuestionIsFound = this.SelectedID > 0;
       }
     });
   }
 
   next() {
-    // 1. إعادة تعيين الحالة المرئية
-    this.IsTrue = false;
-    this.IsNotCorrectOption = false;
-    this.IsSelected = false;
-    this.IsFalse = false;
     // 2. البحث عن الموقع الحالي
     const currentIndex = this.questions.findIndex(
       (q) => q.questionId === this.question.questionId
-    ); 
+    );
     if (currentIndex < 0 || currentIndex === this.questions.length - 1) {
       this.IsEndQuestion = true;
       return;
@@ -69,6 +67,9 @@ export class TestDetailsComponent implements OnInit {
       // 5. تحديث Shared Service بالسؤال التالي
       this._questApi.question.next(nextQuestion);
 
+      const optionValue = localStorage.getItem(`${this.question.questionId}`);
+      this.SelectedID = optionValue ? parseInt(optionValue) : 0;
+      this.QuestionIsFound = this.SelectedID > 0;
       // 6. التنقل إلى الـ URL الجديد (باستخدام الدالة المحسنة)
       this.Redirect(nextQuestion.questionId);
     }
@@ -91,33 +92,64 @@ export class TestDetailsComponent implements OnInit {
       nextQuestionId,
     ]);
   }
-
   endTest() {
     this._router.navigate(['/result']);
   }
-
   back() {
-    let value: IQuestion = this.questions.find(
-      (x) =>
-        this.questions.indexOf(x) == this.questions.indexOf(this.question) - 1
-    )!;
-    this._questApi.question.next(value);
+    // 2. البحث عن الموقع الحالي
+    const currentIndex = this.questions.findIndex(
+      (q) => q.questionId === this.question.questionId
+    );
+    if (currentIndex < 0 || currentIndex > this.questions.length - 1) {
+      this.IsStartQuestion = true;
+      return;
+    }
+    // 4. تحديد السؤال التالي
+    const previousOption = this.questions[currentIndex - 1];
+    if (previousOption) {
+      // 5. تحديث Shared Service بالسؤال التالي
+      this._questApi.question.next(previousOption);
+      const optionValue = localStorage.getItem(`${this.question.questionId}`);
+      this.SelectedID = optionValue ? parseInt(optionValue) : 0;
+      this.QuestionIsFound = this.SelectedID > 0;
+      // 6. التنقل إلى الـ URL الجديد (باستخدام الدالة المحسنة)
+      this.Redirect(previousOption.questionId);
+    }
+    this.IsStartQuestion = this.questions.indexOf(previousOption) == 0;
   }
 
   select(option: IOption) {
-    this.IsSelected = true;
-    this.SelectOptionId = option.optionId;
-    if (option.optionId == this.question.optionAswerId) {
-      this.IsTrue = true;
+    const questionKey = `${this.question.questionId}`;
+    const optionValue = option.optionId;
+    const previousOptionStored = localStorage.getItem(questionKey);
+    const optionStored = previousOptionStored
+      ? parseInt(previousOptionStored)
+      : null;
+
+    const IsNewOption = option.optionId === this.question.optionAswerId;
+    const wasOldOption = optionStored === this.question.optionAswerId;
+    if (IsNewOption && !wasOldOption) {
       this.addDegree();
-    } else {
-      this.IsFalse = true;
-      this.IsNotCorrectOption = true;
+    } else if (!IsNewOption && wasOldOption) {
+      this.removeDegree();
     }
+    this.SelectedID = optionValue;
+    this.IsSelected = true;
+    localStorage.setItem(questionKey, `${optionValue}`);
   }
+
   addDegree() {
     const num = this._shared.degree.getValue() + 1;
-    this._shared.degree.next(num);
+    if (num <= this.questions.length) {
+      this._shared.degree.next(num);
+      localStorage.setItem('degree', `${num}`);
+    }
+  }
+  removeDegree() {
+    const num = this._shared.degree.getValue() - 1;
+    if (num >= 0) {
+      this._shared.degree.next(num);
+      localStorage.setItem('degree', `${num}`);
+    }
   }
 }
-
