@@ -24,7 +24,7 @@ export class TestComponent implements OnInit {
     private _shared: SharedDataService
   ) {}
   ngOnInit(): void {
-    const examId =  1;
+    const examId = Number(this._activate.snapshot.paramMap.get('examId')) || 1;
     const questionId =
       Number(this._activate.snapshot.paramMap.get('questionId')) || 1;
     if (examId > 0) {
