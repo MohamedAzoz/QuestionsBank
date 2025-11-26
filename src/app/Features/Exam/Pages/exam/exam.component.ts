@@ -22,6 +22,7 @@ export class ExamComponent implements OnInit {
   ngOnInit(): void {
     // this._activate.paramMap.subscribe((E) => {
     //   this.subjectId = Number(E.get('subjectId') || 0);
+    localStorage.clear();
     const subjectId2 =
       Number(this._activate.snapshot.paramMap.get('subjectId')) || 1;
 

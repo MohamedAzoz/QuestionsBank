@@ -17,6 +17,7 @@ export class SubjectComponent implements OnInit {
   constructor(private _api: SubjectAPIService) {}
   ngOnInit(): void {
     this.getAll();
+    localStorage.clear();
   }
   getAll() {
     this._api.getAll().subscribe((data) => {
