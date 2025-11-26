@@ -1,13 +1,14 @@
 <div class="container-fluid dis text-bg-light rounded-5 p-2">
-  <div [hidden]="!result" class="row w-100 mx-auto gap-1 gap-lg-2">
+  <div
+    [hidden]="!result"
+    class="row w-100 mx-auto gap-1 gap-lg-2"
+  >
     @if(result>=80 &&result<=100) {
-    <p class="w-75 mx-auto alert alert-success text-center font">Excellent!</p>
+    <p class="w-75 mx-auto alert alert-success text-center">Excellent!</p>
     } @else if (result>=60&&result<=80) {
-    <p class="w-75 mx-auto alert alert-warning text-center font">Very good!</p>
+    <p class="w-75 mx-auto alert alert-warning text-center">Very good!</p>
     } @else if(result>=0&&result<=60) {
-    <p class="w-75 mx-auto alert alert-danger text-center font">
-      Good luck next time
-    </p>
+    <p class="w-75 mx-auto alert alert-danger text-center">Good luck next time</p>
     }
   </div>
   <div class="container cont">
@@ -32,25 +33,12 @@
       <p class="pg">{{ result }}% / 100%</p>
     </div>
   </div>
-
-  <div
-    class="row w-75 d-flex justify-content-center mx-auto gap-2 gap-lg-3 text-center mt-3"
-  >
-    <a
-      class="col-7 col-md-5 btn btn-primary py-2 btnStyle"
-      [hidden]="!IsTest || !subjectId || !testId"
-      (click)="NewTest()"
-    >
-      NewTest
-    </a>
-  </div>
-  <div
-    class="row w-75 d-flex justify-content-center mx-auto gap-2 gap-lg-3 text-center mt-3"
-  >
-    <a
-      class="col-7 col-md-5 btn btn-secondary py-2 btnStyle"
-      (click)="Redirect()"
-      >Home</a
-    >
-  </div>
+  <div class="col-11 col-md-9 m-2 p-3 text-center">
+   <a
+     class="btn click"
+     routerLinkActive="active"
+     >New Test</a
+     >
+     <!-- [routerLink]="['/subject', subjectId, 'test', exam.id, questionId]" -->
+ </div>
 </div>

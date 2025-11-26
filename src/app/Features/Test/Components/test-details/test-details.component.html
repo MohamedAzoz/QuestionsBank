@@ -1,14 +1,14 @@
 <div
   [hidden]="question === null"
-  class="view container-fluid bg-body-secondary question-container rounded-2"
+  class="container-fluid bg-body-secondary question-container rounded-2"
 >
   <div class="row d-flex justify-content-between align-items-center mb-3">
     <p class="text-center text-md-start w-auto mb-0">
-      {{ questions.length }}/{{ questions.indexOf(question) + 1 }}
+      {{ questions.length }}/{{ QuestionIndex + 1 }}
     </p>
   </div>
   <div class="row mb-4">
-    <p class="Text-font text-center text-md-start">
+    <p class=" text-center text-md-start Text-font">
       {{ question.content }}
     </p>
   </div>
@@ -23,7 +23,7 @@
           (IsSelected && option.optionId === SelectedID) ||
           (option.optionId === SelectedID && QuestionIsFound)
       }"
-      class="col-11 col-md-5 btn option-test Text-font rounded-3"
+      class="col-11 btn option-test Text-font rounded-3"
       (click)="select(option)"
     >
       {{ option.text }}
@@ -36,30 +36,37 @@
     </div>
     }
   </div>
-  <div class="w-25 row">
+  <div class="row mt-2 d-flex">
     <button
       (click)="back()"
-      [hidden]="QuestionIndex == 0"
-      class="col-4 col-md-3 py-1 py-lg-2 bg-danger btn next-test m-auto rounded-3 Text-font"
+      [disabled]="QuestionIndex == 0"
+      class="col-3 bg-danger btn back-test rounded-3 Text-font"
     >
-      back
+      <img
+        src="../../../../../assets/svgviewer-output (6).svg"
+        alt="back"
+        class="img-thumbnail img-fluid button-icon"
+      />
     </button>
-  </div>
-  <div class="row w-25">
+
     <button
-    class="col-4 col-md-3 py-1 py-lg-2 bg-primary btn next-test m-auto rounded-3 Text-font"
+      class="col-3 bg-primary btn next-test rounded-3 Text-font"
       (click)="next()"
-      [hidden]="QuestionIndex == questions.length - 1"
+      [disabled]="QuestionIndex == questions.length - 1"
     >
-      next
+      <img
+        src="../../../../../assets/svgviewer-output (5).svg"
+        alt="next"
+        class="img-thumbnail img-fluid button-icon"
+      />
     </button>
- @defer (when IsSelected && IsEndQuestion) {
+    <!-- @defer (when IsSelected && IsEndQuestion) {
     <button
       (click)="endTest()"
-      class="col-4 col-md-3 py-1 py-lg-2 btn end-test m-auto rounded-3 Text-font"
+      class="col-3 py-1 py-lg-2 btn btn-success end-test rounded-3 Text-font"
     >
       End Test
     </button>
-    }
+    } -->
   </div>
 </div>

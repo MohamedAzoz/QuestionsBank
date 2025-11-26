@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../../../../Shared/Services/shared-data.service';
 import { QuestionAPIService } from '../../../Question/Services/question-api.service';
 import { NgClass } from '@angular/common';
+import { TestApiService } from '../../Services/test-api.service';
 
 @Component({
   selector: 'app-test-details',
@@ -16,18 +17,18 @@ import { NgClass } from '@angular/common';
 export class TestDetailsComponent implements OnInit {
   @Input({ required: true }) questions!: IQuestion[];
   question!: IQuestion;
-
-  IsSelected: boolean = false;
-
+  
   SelectedID: number = 0;
   QuestionIndex: number = 0;
-
+  
+  IsSelected: boolean = false;
   IsEndQuestion: boolean = false;
   IsStartQuestion: boolean = false;
   QuestionIsFound: boolean = false;
   constructor(
     private _questApi: QuestionAPIService,
     private _shared: SharedDataService,
+    private _testApi: TestApiService,
     private _router: Router,
     private _active: ActivatedRoute
   ) {}
@@ -36,8 +37,8 @@ export class TestDetailsComponent implements OnInit {
       if (x) {
         this.question = x;
         this.IsSelected = false;
-        // قم بفحص ما إذا كان السؤال الحالي هو الأخير عند التحديث
         this.QuestionIndex = this.questions.indexOf(this.question);
+
         this.IsEndQuestion =
           this.questions.indexOf(this.question) === this.questions.length - 1;
         this.IsStartQuestion =
@@ -92,9 +93,11 @@ export class TestDetailsComponent implements OnInit {
       nextQuestionId,
     ]);
   }
+
   endTest() {
     this._router.navigate(['/result']);
   }
+
   back() {
     // 2. البحث عن الموقع الحالي
     const currentIndex = this.questions.findIndex(
@@ -135,6 +138,10 @@ export class TestDetailsComponent implements OnInit {
     }
     this.SelectedID = optionValue;
     this.IsSelected = true;
+    this._testApi.selectedMap.next({
+      ...this._testApi.selectedMap.getValue(),
+      [this.question.questionId]: true,
+    });
     localStorage.setItem(questionKey, `${optionValue}`);
   }
 
@@ -145,6 +152,7 @@ export class TestDetailsComponent implements OnInit {
       localStorage.setItem('degree', `${num}`);
     }
   }
+
   removeDegree() {
     const num = this._shared.degree.getValue() - 1;
     if (num >= 0) {

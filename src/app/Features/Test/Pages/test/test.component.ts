@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../../../../Shared/Services/shared-data.service';
-import { QuestionDetailsComponent } from '../../../Question/Components/question-details/question-details.component';
 import { IQuestion } from '../../../Question/Models/iquestion';
 import { TestApiService } from '../../Services/test-api.service';
 import { QuestionAPIService } from '../../../Question/Services/question-api.service';
 import { TestDto } from '../../Models/test-dto';
 import { TestDetailsComponent } from "../../Components/test-details/test-details.component";
+import { NgIf } from '@angular/common';
+import { TestSideComponent } from '../../Components/test-side/test-side.component';
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [ TestDetailsComponent],
+  imports: [TestDetailsComponent, TestSideComponent, NgIf],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
 })

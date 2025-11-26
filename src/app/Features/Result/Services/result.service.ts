@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultService {
-  constructor() {}
   grade(degree: number, numOfQuest: number) {
-    const GPA = (degree / numOfQuest) * 100;
+    const GPA = parseInt(`${(degree / numOfQuest) * 100}`);
     return GPA;
   }
 }

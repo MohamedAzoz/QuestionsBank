@@ -3,11 +3,12 @@ import { ExamAPIService } from '../../Services/exam-api.service';
 import { IExam } from '../../Models/iexam';
 import { ExamDetailsComponent } from '../../Components/exam-details/exam-details.component';
 import { ActivatedRoute } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-exam',
   standalone: true,
-  imports: [ExamDetailsComponent],
+  imports: [ExamDetailsComponent, NgIf],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.scss',
 })

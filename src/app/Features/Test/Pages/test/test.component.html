@@ -1,5 +1,6 @@
 
 
 <div class="question-container">
-    <app-test-details [questions]="data"></app-test-details>
+    <app-test-details class="details" [questions]="data" *ngIf="data"></app-test-details>
+    <app-test-side class="side" [questions]="data" *ngIf="data"></app-test-side>
 </div>

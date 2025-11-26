@@ -2,20 +2,47 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    // flex-direction: column;
     box-sizing: border-box;
     padding: 2vw;
     height: 100vh;
     width: 100%;
     background-color: gainsboro;
 }
-@media (max-width:500px) {
+.details {
+    width: 80%;
+    height: 100%;
+    padding: 1vh 1vw;
+    order: 1;
+}
+.side {
+    width: 20%;
+    height: 100%;
+    padding: 1vh 1vw;
+    order: 2;
+}
+@media (max-width:700px) {
     .question-container {
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // flex-direction: column;
-        // height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
         padding: 1vw;
+    }
+    .details {
+        width: 100%;
+        height: 50%;
+        padding: 1vh 1vw;
+        // this order is to make sure that the details component is after the side component
+        order: 2;
+    }
+    .side {
+        width: 100%;
+        height: 50%;
+        padding: 1vh 1vw;
+        // this order is to make sure that the side component is before the details component
+        order: 1;
     }
 }

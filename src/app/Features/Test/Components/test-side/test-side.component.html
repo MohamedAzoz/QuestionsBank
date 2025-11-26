@@ -1,0 +1,29 @@
+<div class="container-fluid side">
+  <div class="row timer">
+    <time datetime="5:20">{{ timeLeft | date : "mm:ss" }}</time>
+  </div>
+  <div
+    class="questions d-flex align-items-center justify-content-center gap-1 flex-wrap"
+  >
+    @for (question of questions; track $index) {
+    <button
+      (click)="go(question.questionId)"
+      class="btn border border-lg-2 border-dark p-2 p-lg-3 rounded-circle my-1 d-flex justify-content-center"
+        [ngClass]="{
+            'text-bg-warning': selectedMap[question.questionId],
+        }"
+    >
+      {{ questions.indexOf(question) + 1 }}
+    </button>
+    }
+  </div>
+  <div class="row d-flex justify-content-center">
+    <button
+      class="btn btn-danger w-75 p-2 rounded-3"
+      (click)="submit()"
+      [disabled]="IsFreezed"
+    >
+      End Test
+    </button>
+  </div>
+</div>

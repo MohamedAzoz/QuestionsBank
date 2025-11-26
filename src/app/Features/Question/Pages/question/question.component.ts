@@ -4,11 +4,12 @@ import { IQuestion } from '../../Models/iquestion';
 import { QuestionDetailsComponent } from '../../Components/question-details/question-details.component';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../../../../Shared/Services/shared-data.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [QuestionDetailsComponent],
+  imports: [QuestionDetailsComponent, NgIf],
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
 })
