@@ -5,7 +5,7 @@ import { IQuestion } from '../../../Question/Models/iquestion';
 import { TestApiService } from '../../Services/test-api.service';
 import { QuestionAPIService } from '../../../Question/Services/question-api.service';
 import { TestDto } from '../../Models/test-dto';
-import { TestDetailsComponent } from "../../Components/test-details/test-details.component";
+import { TestDetailsComponent } from '../../Components/test-details/test-details.component';
 import { NgIf } from '@angular/common';
 import { TestSideComponent } from '../../Components/test-side/test-side.component';
 
@@ -37,6 +37,7 @@ export class TestComponent implements OnInit {
         this._question.question.next(x.data.at(questionId - 1)!);
         this._shared.numberOfQuestions.next(x.data.length);
         this.data = x.data;
+        this._test.Questions.next(x.data);
       });
     }
   }

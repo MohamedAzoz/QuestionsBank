@@ -8,16 +8,23 @@ import { TestDto } from '../Models/test-dto';
 import { IQuestionSelectes } from '../Models/iquestion-selectes';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TestApiService {
-  IsSelected:BehaviorSubject<IQuestionSelectes>=new BehaviorSubject<IQuestionSelectes>({optionId: 0, IsSelected: false});
-  selectedMap: BehaviorSubject<{ [id: number]: boolean }> = new BehaviorSubject<{ [id: number]: boolean }>({});
+  IsSelected: BehaviorSubject<IQuestionSelectes> =
+    new BehaviorSubject<IQuestionSelectes>({ optionId: 0, IsSelected: false });
+  selectedMap: BehaviorSubject<{ [id: number]: boolean }> =
+    new BehaviorSubject<{ [id: number]: boolean }>({});
+
+  Questions: BehaviorSubject<IQuestion[]> = new BehaviorSubject<IQuestion[]>(
+    []
+  );
   constructor(private _http: HttpClient) {}
 
-  getTest(_TestDto:TestDto): Observable<IResult<IQuestion[]>> {
+  getTest(_TestDto: TestDto): Observable<IResult<IQuestion[]>> {
     return this._http.post<IResult<IQuestion[]>>(
-      `${environment.apiUrl}/Question/Test`,_TestDto
+      `${environment.apiUrl}/Question/Test`,
+      _TestDto
     );
   }
 }

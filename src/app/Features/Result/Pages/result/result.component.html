@@ -39,6 +39,17 @@
     <a
       class="col-7 col-md-5 btn btn-primary py-2 btnStyle"
       [hidden]="!IsTest || !subjectId || !testId"
+      (click)="TestReview()"
+    >
+     Review Test
+    </a>
+  </div>
+  <div
+    class="row w-75 d-flex justify-content-center mx-auto gap-2 gap-lg-3 text-center mt-3"
+  >
+    <a
+      class="col-7 col-md-5 btn btn-primary py-2 btnStyle"
+      [hidden]="!IsTest || !subjectId || !testId"
       (click)="NewTest()"
     >
       NewTest

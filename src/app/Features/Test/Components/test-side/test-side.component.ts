@@ -46,7 +46,7 @@ export class TestSideComponent implements OnInit {
         this.submit();
       }
       time--;
-      this.IsFreezed = time >= 29 * 60;
+      this.IsFreezed = time >= 29.9 * 60;
       this.timeLeft = time * 1000;
     }, 1000);
   }

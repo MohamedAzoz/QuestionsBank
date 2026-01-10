@@ -25,6 +25,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'review-test',
+    loadComponent: () =>
+      import('./Features/Test/Pages/test-review/test-review.component').then(
+        (C) => C.TestReviewComponent
+      ),
+  },
+  {
     path: 'result',
     loadComponent: () =>
       import('./Features/Result/Pages/result/result.component').then(

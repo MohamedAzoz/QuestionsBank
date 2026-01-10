@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ResultService } from '../../Services/result.service';
 import { SharedDataService } from '../../../../Shared/Services/shared-data.service';
 import { NgClass } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavigationService } from '../../../../Core/Services/navigation.service';
 
 @Component({
   selector: 'app-result',
   standalone: true,
-  imports: [NgClass, RouterLink],
+  imports: [NgClass],
   templateUrl: './result.component.html',
   styleUrl: './result.component.scss',
 })
@@ -28,24 +28,23 @@ export class ResultComponent implements OnInit {
     private _shared: SharedDataService,
     private _router: Router
   ) {
-        const navigation = this._router.getCurrentNavigation();
+    const navigation = this._router.getCurrentNavigation();
 
     if (navigation && navigation.previousNavigation) {
-      const prevUrl = navigation.previousNavigation.finalUrl?.toString()??'';
+      const prevUrl = navigation.previousNavigation.finalUrl?.toString() ?? '';
       this.extractPreviousIds(prevUrl);
-  }
+    }
   }
   ngOnInit(): void {
     let mark: number = 0;
     this.degree = this._shared.degree.getValue();
-    
-    
+
     const storedDegree = parseInt(localStorage.getItem('degree') ?? '0');
     if (storedDegree > this.degree) {
-        this.degree = storedDegree;
+      this.degree = storedDegree;
     }
 
-    this.numberOfQuestions = this._shared.numberOfQuestions.getValue(); 
+    this.numberOfQuestions = this._shared.numberOfQuestions.getValue();
 
     const value = this._result.grade(this.degree, this.numberOfQuestions);
 
@@ -69,8 +68,11 @@ export class ResultComponent implements OnInit {
     }
   }
 
-NewTest() {
+  NewTest() {
     this.Redirect(this.Url);
+  }
+  TestReview() {
+    this._router.navigate(['review-test']);
   }
 
   Redirect(location: string = '') {
